@@ -29,12 +29,24 @@ function App() {
 
   const symbol = supportedNetworks[chainId].tokenSymbol;
 
-  const prizePool =
-    tournament?.prizePool +
-    (hasJoinedTournament
-      ? 0
-      : tournament?.joiningFee *
-        (1 - tournament?.commissionPercentage / 10000));
+  {
+    /* const prizePool = */
+  }
+  {
+    /*   tournament?.prizePool + */
+  }
+  {
+    /*   (hasJoinedTournament */
+  }
+  {
+    /*     ? 0 */
+  }
+  {
+    /*     : tournament?.joiningFee * */
+  }
+  {
+    /*       (1 - tournament?.commissionPercentage / 10000)); */
+  }
 
   return (
     <div>
@@ -65,14 +77,14 @@ function App() {
             <h6 className="max-w-sm text-center mx-auto tracking-wider">
               You have joined today's tournament🥳.<br></br> Prize pool{" "}
               <span className="focused-text">
-                {prizePool.toFixed(4)} ${symbol}
+                {tournament && tournament.prizePool} ${symbol}
               </span>{" "}
             </h6>
           ) : (
             <h6 className="max-w-sm text-center mx-auto tracking-wider">
               Take part in today‘s prize pool of{" "}
               <span className="focused-text ">
-                {prizePool.toFixed(4)} ${symbol}!{" "}
+                {tournament && tournament.prizePool} ${symbol}!{" "}
               </span>{" "}
               <br></br>
               Pay only{" "}

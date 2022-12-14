@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 import create from "zustand";
 import { fetchContracts, loadTournament } from "../utils/fetch_contracts";
-import { formatBigNum } from "../utils/helper";
+import { formatBigNum, roundOf } from "../utils/helper";
 import { defaultChainId, supportedNetworks } from "../utils/network_config";
 
 const web3Store = (set: any, get: any) => ({
@@ -80,15 +80,17 @@ const web3Store = (set: any, get: any) => ({
 
       //console.log("DATA ", data);
 
-      await fetch("https://to-the-mooon-admin.onrender.com/record_score", {
-        // await fetch("http://127.0.0.1:8000/record_score", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          score: highscore,
-          address: get().accounts[0],
-        }),
-      });
+      await fetch(
+        `https://to-the-moon-server.onrender.com/${get().chainId}/recordScore/`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            score: highscore,
+            address: get().accounts[0],
+          }),
+        }
+      );
     } catch (e: any) {
       console.log("Error from Server: ", e);
     }
@@ -137,6 +139,12 @@ const web3Store = (set: any, get: any) => ({
 
     const endsIn = new Date(endsInNum * 1000);
 
+    const calPrizePool =
+      parseFloat(ethers.utils.formatEther(prizePool)) +
+      (get().hasJoinedTournament
+        ? 0
+        : joiningFee * (1 - commissionPercentage.toNumber() / 10000));
+
     set({
       currentTournament: {
         joiningFee,
@@ -146,7 +154,8 @@ const web3Store = (set: any, get: any) => ({
         endsIn,
         id: parseInt(id),
         commissionPercentage: commissionPercentage.toNumber(),
-        prizePool: parseFloat(ethers.utils.formatEther(prizePool)),
+        //prizePool: parseFloat(ethers.utils.formatEther(prizePool)),
+        prizePool: roundOf(calPrizePool, get().chainId),
       },
     });
 

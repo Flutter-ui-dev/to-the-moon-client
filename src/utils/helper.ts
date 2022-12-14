@@ -1,11 +1,15 @@
 import { ethers } from "ethers";
-import { useSnackbar } from "react-simple-snackbar";
 import { supportedNetworks } from "./network_config";
 
 const formatAddress = (address: string) => {
   return address.length == 0
     ? ""
     : address.substring(0, 4) + "...." + address.slice(-4);
+};
+
+const roundOf = (value: number, chainId: number) => {
+  const precision = supportedNetworks[chainId].decimal;
+  return value.toFixed(precision);
 };
 
 const formatBigNum = (num: any) => ethers.utils.formatEther(num);
@@ -36,4 +40,5 @@ export {
   snackbarOptions,
   contractAddress,
   copyToClipboard,
+  roundOf,
 };

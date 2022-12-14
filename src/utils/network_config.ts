@@ -8,7 +8,8 @@ const supportedNetworks: any = {
     name: "Hardhat",
     tokenSymbol: "ETH",
     rpcURL: "http://localhost:8545",
-    address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    address: "0xa513E6E4b8f2a923D98304ec87F64353C4D5C853",
+    decimal: 4,
   },
   // npx hardhat run scripts/deploy.js --network mumbai
   // Returned address is wrong. https://github.com/nomiclabs/hardhat/issues/2162.
@@ -17,14 +18,16 @@ const supportedNetworks: any = {
     name: "Polygon Mumbai Testnet",
     tokenSymbol: "MATIC",
     rpcURL: "https://rpc-mumbai.maticvigil.com",
-    address: "0xDA7Ffea2CAA2A22159d23CB4C59a1B149a33e0d7",
+    address: "0x694d53f603Ae497dE034dCc929B3830e801646Ce",
+    decimal: 4,
   },
 
   1313161555: {
     name: "Aurora Testnet",
     tokenSymbol: "ETH",
     rpcURL: "https://testnet.aurora.dev",
-    address: "0xe604B496F10CBdAA68412Ea7e015630C6D6C3c49",
+    address: "0x511FD3ff870d824797377b7529A74CBA77562174",
+    decimal: 4,
   },
 };
 
